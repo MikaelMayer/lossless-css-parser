@@ -32,7 +32,7 @@ On the browser
 Simply parse css string, and log the output
 
 ```html
-<script type="text/javascript" src="css.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/MikaelMayer/lossless-css-parser@master/losslesscss.js"></script>
 <script type="text/javascript">
 	var cssString = ' .someSelector { margin:40px 10px; padding:5px}';
 	//initialize parser object
