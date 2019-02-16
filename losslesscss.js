@@ -47,7 +47,7 @@
 
     @param source css string to be parsed
 
-    @return object css : List { selector, type, styles }
+    @return object css : List { selector, kind, content }
   */
   losslesscssjs.prototype.parseCSS = function(source) {
     if (source === undefined) {
@@ -71,7 +71,7 @@
         arr = exec(cssCharSetRegex, source);
         if(arr !== null) {
           css.push({
-            type: "@charset",
+            kind: "@charset",
               wsBefore: arr[1],
             selector: arr[2], // '@charset'
               wsBeforeValue: arr[3],
@@ -87,7 +87,7 @@
         arr = exec(cssImportStatementRegex, source);
         if (arr !== null) {
           css.push({
-            type: "@import",
+            kind: "@import",
               wsBefore: arr[1],
             selector: arr[2], // '@charset'
               wsBeforeValue: arr[3],
@@ -104,7 +104,7 @@
       arr = exec(cssKeyframeRegex, source);
       if (arr !== null) {
         css.push({
-          type: '@keyframes',
+          kind: '@keyframes',
             wsBefore: arr[1],
           selector: arr[2], // @keyframes
             wsBeforeAtNameValue: arr[3],
@@ -121,7 +121,7 @@
       if (arr !== null) {
         //we have a media query
         var cssObject = {
-          type: '@media',
+          kind: '@media',
             wsBefore: arr[1],
           selector: arr[2], // @media
             wsBeforeAtNameValue: arr[3],
@@ -139,7 +139,7 @@
       if(arr !== null) {
         var [rules, wsBeforeClosingBrace] = this.parseRules(arr[4], line + (arr[1]+arr[2]+arr[3]).split("\n").length - 1);
         var style = {
-            type: "cssBlock",
+            kind: "cssBlock",
             wsBefore: arr[1],
             selector: arr[2],
             wsBeforeOpeningBrace: arr[3], // {
@@ -154,9 +154,9 @@
     }
     arr = exec(cssWs, source);
     if(arr !== null) {
-      css.push({type: 'whitespace', ws: arr[0]});
+      css.push({kind: 'whitespace', ws: arr[0]});
     } else {
-      css.push({type: 'whitespace', ws: source});
+      css.push({kind: 'whitespace', ws: source});
       this.lastError = "Line " + line + ":\ncould not parse this as css (and it's not a final whitespace): " + source;
       console.log(this.lastError);
     }
@@ -233,7 +233,7 @@
     }
     for(var i in cssBase) {
       var cssElem = cssBase[i];
-      var t = cssElem.type;
+      var t = cssElem.kind;
       if(t === '@import' || t === '@charset') {
         ret += cssElem.wsBefore;
         ret += cssElem.selector; // @import or @charset
@@ -261,7 +261,7 @@
       } else if(t === 'whitespace') {
         ret += cssElem.ws;
       } else {
-        console.log("Unknown type to unparse:", cssElem);
+        console.log("Unknown kind to unparse:", cssElem);
       }
     }
 

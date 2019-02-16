@@ -86,7 +86,7 @@ type alias CssRules =
 type alias CssTopLevel = 
   Array (
     {
-      type: "@charset" | "@import",
+      kind: "@charset" | "@import",
         wsBefore: String,
       selector: String, // '@charset' or '@import'
         wsBeforeValue: String,
@@ -94,7 +94,7 @@ type alias CssTopLevel =
         wsBeforeAndSemicolon: String
     }
     | {
-      type: "@keyframes" | "@media",
+      kind: "@keyframes" | "@media",
         wsBefore: String,
       selector: String, // "@keyframes" or "@media"
         wsBeforeAtNameValue: String,
@@ -104,7 +104,7 @@ type alias CssTopLevel =
         wsBeforeClosingBrace: String, // '}' after this one
     }
     | {
-      type: "cssBlock",
+      kind: "cssBlock",
         wsBefore: String,
       selector: String,
         wsBeforeOpeningBrace: String, // '{' after this one
@@ -112,7 +112,7 @@ type alias CssTopLevel =
         wsBeforeClosingBrace: String  // '}' after t his one
     }
     | {
-      type: "whitespace",
+      kind: "whitespace",
       ws: String
     }
   )
