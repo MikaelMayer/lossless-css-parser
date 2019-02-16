@@ -1,0 +1,20 @@
+{
+  "name": "lossless-css-parser",
+  "version": "0.0.1",
+  "description": "A lossless and fast CSS parser in JavaScript.",
+  "main": "css.js",
+  "dependencies": {},
+  "scripts": {
+    "test": "tests/cssParsing.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MikaelMayer/lossless-css-parser"
+  },
+  "author": "Mikaël Mayer <mikael.mayer@polytechnique.edu>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MikaelMayer/lossless-css-parser/issues"
+  },
+  "homepage": "https://github.com/MikaelMayer/lossless-css-parser"
+}
